@@ -1,0 +1,31 @@
+                            PROIECT PA
+                           -Halite game-
+
+    Pentru realizarea jocului propus pentru proiect am pornit de la scheletul
+de cod in Java pus la dispozitie de site-ul oficial https://halite.io. De asemenea,
+mentionam ca am pornit construirea algoritmului inspirandu-ne din urmatorul articol: 
+http://braino.org/thoughts/halite_the_simple_way.html .
+    Am adaugat fiecarei casute, pe langa "production", "owner" si "strength", 
+campurile "power", "xCoord","yCoord" si "inserted". Variabila "power", care
+initial are valoarea Integer.MIN_VALUE, foloseste la crearea fluxului mutarii
+casutelor. Variabilele "xCoord" si "yCoord" le-am adaugat pentru a putea accesa
+coordonatele fiecarei casute in orice moment. Variabila booleana "inserted"
+este folosita pentru a identifica usor casutele vecine adaugate pentru prelucrare.
+    In fiecare tura, casutelor vecine ,care nu sunt ale noastre, le asociem in
+campul "power" valoarea "7 * production - strength", semnificand faptul ca ne vom
+indrepta spre zonele cu productie mai mare, tinand cont in acelasi timp si de
+"strength". Apoi le marcam si le introducem in coada de prioritati, 
+care foloseste un comparator pentru sortare descrescatoare(vrem sa le ocupam mai 
+intai pe cele cu "power" mai mare). Dupa acest pas, ne mutam spre interior si,
+pentru fiecare casuta din coada de prioritati luam vecinii care ne apartin,ii
+marcam, le actualizam "power" si ii adaugam in coada.
+    In final, pentru toate casutele care ne apartin decidem directia de miscare.
+Pentru casuta vecina care are cea mai mare valoare pentru "power" memorez directia
+si daca se poate muta(adica "strength" pentru casuta curenta este mai mare decat
+cea pe care vrem sa ne mutam) se va muta in acea directie. In cazul in care 
+va trebui sa ne mutam pe o casuta care ne apartine verificam mai intai ca
+"production" < "strength", altfel casuta nu se va muta in acea tura.
+	Legat de complexitatea algoritmului se observa ca exista 3 parcurgeri ale
+tablei de joc. Operatiile efectuate in cadrul acestora sunt constante, la fel si
+cele din cadrul prelucrarilor asupra cozii de prioritate(neglijabile in comparatie
+cu parcurgerile tablei). Asadar, complexitatea algoritmului este O(height*width).
